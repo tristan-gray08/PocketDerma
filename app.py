@@ -12,6 +12,19 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
+import requests
+import os
+
+model_url = 'https://huggingface.co/tristan-gray/acne-detector/resolve/main/best.pt'
+model_path = os.path.join("runs/detect/train/weights", "best.pt")
+os.makedirs(os.path.dirname(model_path), exist_ok=True)
+
+if not os.path.exists(model_path):
+    with requests.get(model_url, stream=True) as r:
+        r.raise_for_status()
+        with open(model_path, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
 
 # Set page config
 st.set_page_config(
