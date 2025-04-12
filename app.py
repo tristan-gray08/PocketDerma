@@ -835,13 +835,13 @@ def main():
             
             # Draw detections on image
            # Draw detections on image
-annotated_image = draw_detections(image, detections)
+            annotated_image = draw_detections(image, detections)
 
 # ❗ OpenCV loads in BGR, Streamlit wants RGB — convert color space
-rgb_annotated_image = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
+            rgb_annotated_image = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
 
 # ✅ Display correctly-colored image
-st.image(rgb_annotated_image, caption="🖼️ Detected Acne (Color-Corrected)", use_column_width=True)
+            st.image(rgb_annotated_image, caption="🖼️ Detected Acne (Color-Corrected)", use_column_width=True)
             # Display detection results
             st.markdown("### Detection Results")
             st.write(f"Number of acne spots detected: {len(detections)}")
